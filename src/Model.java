@@ -1,7 +1,6 @@
-import javafx.scene.Node;
-import javafx.scene.control.TextField;
-
-import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Model {
 
@@ -39,8 +38,17 @@ public class Model {
         return table;
     }
 
-    public void exportLatex(String filepath, String filename, String table){
-        // Create the file of filename @ filepath
-        System.out.println("[LaTeX TableMaker] Exported!");
+    public void exportLatex(String filepath, String filename, String table) throws IOException {
+        String path = "output\\" + filename + ".txt";
+
+        try {
+            FileWriter fileWriter = new FileWriter(path);
+            fileWriter.write(table);
+            fileWriter.close();
+            System.out.println("[LaTeX TableMaker] Exported!");
+        }
+        catch(IOException e){
+            System.out.println("[LaTeX TableMaker] An error occurred while exporting the table! Closing...");
+        }
     }
 }

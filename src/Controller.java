@@ -1,11 +1,10 @@
-// Java imports
-
-// JavaFX imports
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+
+import java.io.IOException;
 
 public class Controller {
     /** Instantiated in FXML **/
@@ -79,7 +78,7 @@ public class Controller {
      *
      * @param actionEvent on "Export to LaTeX"
      */
-    public void exportToLatex(ActionEvent actionEvent) {
+    public void exportToLatex(ActionEvent actionEvent) throws IOException {
         System.out.println("[LaTeX TableMaker] Converting table to LaTeX code - asking user for filename...");
         String filepath = "path";
         String filename = "name";
