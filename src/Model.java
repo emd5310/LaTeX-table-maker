@@ -1,20 +1,25 @@
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Model {
 
-    public String writeLatex(String[][] tableContents, int rows, int cols){
+    /**
+     * Takes the separate values from the table and creates the LaTeX representing the table, in one string.
+     * It then passes the result over to exportLatex.
+     *
+     * @param tableContents individual strings held in each cell
+     * @param totalPath to the directory to save to + the filename.txt
+     * @param rows # rows in table
+     * @param cols # cols in table
+     * @throws IOException if exportLatex(..) has an issue writing the file
+     */
+    public void writeLatex(String[][] tableContents, String totalPath, int rows, int cols) throws IOException {
 
-        // Line across top of table
         String header = "\\begin{center}\n\\begin{tabular}{ " + "|c".repeat(cols) + "| }\n" + "\\hline\n";
 
         StringBuilder body = new StringBuilder();
-
         for(int i = 0; i < cols; i++){
-
             StringBuilder newLine = new StringBuilder();
-
             for(int j = 0; j < rows; j++){
                 newLine.append(tableContents[i][j]);
                 if(j == (rows - 1)){
@@ -28,21 +33,25 @@ public class Model {
             body.append(newLine);
         }
 
-        // Line across bottom of table
         String footer = """
                 \\end{tabular}
                 \\end{center}""";
 
         String table = header + body.toString() + footer;
-        System.out.println("[LaTeX TableMaker] LaTeX written");
-        return table;
+        System.out.println("[LaTeX TableMaker] LaTeX written - exporting table...");
+        exportLatex(totalPath, table);
     }
 
-    public void exportLatex(String filepath, String filename, String table) throws IOException {
-        String path = "output\\" + filename + ".txt";
-
+    /**
+     * Exports the written LaTeX to a file for the user to access
+     *
+     * @param totalPath to the directory to save to + the filename.txt
+     * @param table written latex table
+     * @throws IOException if it encounters trouble trying to output the file
+     */
+    public void exportLatex(String totalPath, String table) throws IOException {
         try {
-            FileWriter fileWriter = new FileWriter(path);
+            FileWriter fileWriter = new FileWriter(totalPath);
             fileWriter.write(table);
             fileWriter.close();
             System.out.println("[LaTeX TableMaker] Exported!");

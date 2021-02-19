@@ -1,10 +1,15 @@
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.DirectoryChooser;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 public class Controller {
     /** Instantiated in FXML **/
@@ -71,18 +76,29 @@ public class Controller {
     }
 
     /**
-     * TODO Get a filename from the user - perhaps ask where to save the file?
-     *
      * Takes the values currently in the table and creates a file
      * holding the corresponding LaTeX code.
      *
      * @param actionEvent on "Export to LaTeX"
+     * @throws IOException if exportLatex(..) has an issue writing the file
+     * @throws InterruptedException if the program gets stopped while waiting prompts
      */
-    public void exportToLatex(ActionEvent actionEvent) throws IOException {
+    public void exportToLatex(ActionEvent actionEvent) throws IOException, InterruptedException {
         System.out.println("[LaTeX TableMaker] Converting table to LaTeX code - asking user for filename...");
-        String filepath = "path";
-        String filename = "name";
-        // Do stuff
+
+        String filePath = "";
+        DirectoryChooser pathSelector = new DirectoryChooser();
+        File path = pathSelector.showDialog(Main.stage);
+        if (path != null) {
+            filePath = path.getAbsolutePath();
+        }
+        TimeUnit.MILLISECONDS.sleep(500);
+        TextInputDialog inputFileName = new TextInputDialog();
+        inputFileName.setTitle("LaTeX TableMaker");
+        inputFileName.setHeaderText("Enter filename:");
+        inputFileName.showAndWait();
+        String fileName = inputFileName.getEditor().getText();
+        String totalPath = filePath + "\\" + fileName + ".txt";
 
         String[][] tableContents = new String[numRows][numCols];
 
@@ -93,9 +109,17 @@ public class Controller {
             }
         }
 
-        String table = model.writeLatex(tableContents, numRows, numCols);
-        System.out.println(table);
-        model.exportLatex(filepath, filename, table);
-        // TODO Prompt the user to close the program or make another table
+        model.writeLatex(tableContents, totalPath, numRows, numCols);
+
+        TimeUnit.MILLISECONDS.sleep(500);
+
+        Alert alert = new Alert(Alert.AlertType.NONE, "Make another table?",
+                ButtonType.YES, ButtonType.CLOSE);
+        alert.setTitle("LaTeX TableMaker");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.orElse(null) == ButtonType.CLOSE){
+            System.out.println("[LaTeX TableMaker] Closing program");
+            Platform.exit();
+        }
     }
 }

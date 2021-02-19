@@ -6,16 +6,20 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public static Stage stage;
     public Scene scene;
     public Parent root;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        stage = primaryStage;
+
         root = FXMLLoader.load(getClass().getResource("latex_tm.fxml"));
-        primaryStage.setTitle("LaTeX Table Maker");
+        stage.setTitle("LaTeX Table Maker");
         scene = new Scene(root, 900, 750);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
