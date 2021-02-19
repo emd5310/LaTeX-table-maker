@@ -4,7 +4,6 @@
  * Passing panes & such by ref will be fine
  *
  * All of this is TODO!
- * 0. Refactor everything into a different project file, currently too much 'sample' hanging around
  * 1. Get a LaTeX file being written to a .txt file in an /output directory
  * 2. Add options for the user to change the alignment, yes/no for lines, etc.
  *  2.5 Output will need to be modified accordingly to accommodate this
