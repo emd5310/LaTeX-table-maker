@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane id="baseGrid" fx:id="baseGrid" stylesheets="stylesheets/baseGrid.css" alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="900.0" vgap="10" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+    <Label alignment="CENTER_RIGHT" text="Rows:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+        <cursor>
+            <Cursor fx:constant="DEFAULT" />
+        </cursor>
+        <padding>
+            <Insets right="2.0" />
+        </padding>
+    </Label>
+    <Label layoutX="48.0" layoutY="614.0" text="Columns:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+        <cursor>
+            <Cursor fx:constant="DEFAULT" />
+        </cursor>
+        <padding>
+            <Insets right="2.0" />
+        </padding>
+    </Label>
+    <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <children>
+            <TextField id="numOfRows" fx:id="numOfRows" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#generateTable" prefHeight="26.0" prefWidth="30.0" text="5" />
+            <Button onAction="#generateTable" text="Generate Table" />
+            <Button onAction="#loadTable" text="Load Table" />
+        </children>
+    </HBox>
+    <GridPane alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="61.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="690.0" minWidth="10.0" prefWidth="689.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+
+            <TextField id="numOfCols" fx:id="numOfCols" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#generateTable" prefHeight="26.0" prefWidth="30.0" text="5" />
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+                <children>
+                    <Button onAction="#exportToLatex" text="Export to LaTeX" />
+                </children>
+            </HBox>
+        </children>
+    </GridPane>
+    <columnConstraints>
+        <ColumnConstraints maxWidth="72.0" minWidth="-Infinity" prefWidth="65.0" />
+        <ColumnConstraints maxWidth="769.0" minWidth="743.0" prefWidth="750.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="500.0" prefHeight="30.0" />
+        <RowConstraints maxHeight="26.0" minHeight="26.0" prefHeight="26.0" />
+        <RowConstraints maxHeight="26.0" minHeight="26.0" prefHeight="26.0" />
+    </rowConstraints>
+</GridPane>
