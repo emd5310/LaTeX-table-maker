@@ -35,10 +35,10 @@ public class Controller {
     public void generateTable(ActionEvent actionEvent) {
 
         if(tableGrid == null){
-            System.out.println("[LaTeX TableMaker] Generating table for user");
+            System.out.println("[LaTeX TableMaker] Generating table");
         }
         else {
-            System.out.println("[LaTeX TableMaker] Re-generating table for user");
+            System.out.println("[LaTeX TableMaker] Re-generating table");
             baseGrid.getChildren().remove(tableGrid);
         }
 
@@ -84,7 +84,7 @@ public class Controller {
      * @throws InterruptedException if the program gets stopped while waiting prompts
      */
     public void exportToLatex(ActionEvent actionEvent) throws IOException, InterruptedException {
-        System.out.println("[LaTeX TableMaker] Converting table to LaTeX code - asking user for filename...");
+        System.out.println("[LaTeX TableMaker] Writing table to LaTeX...");
 
         String filePath = "";
         DirectoryChooser pathSelector = new DirectoryChooser();
@@ -92,7 +92,9 @@ public class Controller {
         if (path != null) {
             filePath = path.getAbsolutePath();
         }
+
         TimeUnit.MILLISECONDS.sleep(500);
+
         TextInputDialog inputFileName = new TextInputDialog();
         inputFileName.setTitle("LaTeX TableMaker");
         inputFileName.setHeaderText("Enter filename:");
@@ -118,7 +120,7 @@ public class Controller {
         alert.setTitle("LaTeX TableMaker");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.orElse(null) == ButtonType.CLOSE){
-            System.out.println("[LaTeX TableMaker] Closing program");
+            System.out.println("[LaTeX TableMaker] Closing program - Goodbye");
             Platform.exit();
         }
     }

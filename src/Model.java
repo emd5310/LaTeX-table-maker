@@ -38,7 +38,7 @@ public class Model {
                 \\end{center}""";
 
         String table = header + body.toString() + footer;
-        System.out.println("[LaTeX TableMaker] LaTeX written - exporting table...");
+        System.out.println("[LaTeX TableMaker] LaTeX written! Exporting...");
         exportLatex(totalPath, table);
     }
 
@@ -54,10 +54,10 @@ public class Model {
             FileWriter fileWriter = new FileWriter(totalPath);
             fileWriter.write(table);
             fileWriter.close();
-            System.out.println("[LaTeX TableMaker] Exported!");
+            System.out.println("[LaTeX TableMaker] Exported! File saved to " + totalPath);
         }
         catch(IOException e){
-            System.out.println("[LaTeX TableMaker] An error occurred while exporting the table! Closing...");
+            System.out.println("[LaTeX TableMaker] An error occurred while exporting the table! Closing program.");
         }
     }
 }
